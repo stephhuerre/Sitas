@@ -22,10 +22,6 @@ class PlaneDetailViewController: UIViewController {
   @IBOutlet weak var activeView: UIView!
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var idLabel: UILabel!
-  @IBOutlet weak var iataLabel: UILabel!
-  @IBOutlet weak var icaoLabel: UILabel!
-  @IBOutlet weak var callsignLabel: UILabel!
   @IBOutlet weak var countryLabel: UILabel!
   @IBOutlet weak var noPlaneLabel: UILabel!
 
@@ -45,10 +41,6 @@ class PlaneDetailViewController: UIViewController {
     updateActivity(plane.isActive)
     updateImage()
     nameLabel.text = plane.hasName ? "Name: \(plane.name)" : "No name"
-    update(label: idLabel, with: "ID:", content: plane.id)
-    update(label: iataLabel, with: "iata:", content: plane.iata)
-    update(label: icaoLabel, with: "icao:", content: plane.icao)
-    update(label: callsignLabel, with: "Callsign:", content: plane.callsign)
     update(label: countryLabel, with: "Country:", content: plane.country)
   }
 
