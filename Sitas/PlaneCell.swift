@@ -19,7 +19,8 @@ class PlaneCell: UICollectionViewCell {
   // MARK: - ibOtulets
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var activeView: UIView!
-  @IBOutlet weak var countryLabel: UILabel!
+  @IBOutlet weak var imageView: UIImageView!
+  @IBOutlet weak var imageActivityView: UIActivityIndicatorView!
 
   // MARK: - UIView lifecycle
   override func layoutSubviews() {
@@ -39,11 +40,30 @@ class PlaneCell: UICollectionViewCell {
     guard let plane = plane else {
       nameLabel.text = "No Plane"
       activeView.backgroundColor = .red
-      countryLabel.text = "-"
+      imageView.isHidden = true
       return
     }
     nameLabel.text = plane.hasName ? plane.name : "No name"
     activeView.backgroundColor = plane.isActive ? UIColor.green : UIColor.red
-    countryLabel.text = plane.hasCountry ? plane.country : "No country"
+    updateImage()
+  }
+
+  private func updateImage() {
+    guard let imageString = plane?.imageString else {
+      imageView.isHidden = true
+      return
+    }
+
+    imageView.isHidden = false
+    let results = imageString.matches(for: "data:image\\/([a-zA-Z]*);base64,([^\\\"]*)")
+    if let base64Image = results.first {
+      imageView.image = base64Image.base64ToImage()
+    } else {
+      imageActivityView.startAnimating()
+      imageView.kf.setImage(with: URL(string: imageString), placeholder: nil,
+                            options: []) { result in
+        self.imageActivityView.stopAnimating()
+      }
+    }
   }
 }
