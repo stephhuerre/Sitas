@@ -1,0 +1,21 @@
+disabled_rules:
+  - force_cast
+  - force_try
+  - function_parameter_count
+  - file_length
+  - type_body_length
+  - unused_optional_binding
+  - identifier_name
+  - large_tuple
+  - valid_ibinspectable
+  - shorthand_operator
+  - switch_case_alignment
+  - unused_closure_parameter
+  - nesting
+  - todo
+included:
+  - Sitas
+excluded:
+  - Pods
+line_length: 180
+reporter: xcode

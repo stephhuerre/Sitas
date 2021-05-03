@@ -1,0 +1,6 @@
+framework module Pods_Sitas {
+  umbrella header "Pods-Sitas-umbrella.h"
+
+  export *
+  module * { export * }
+}
